@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>telebot dashboard</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static './assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static './assets/vendors/css/vendor.bundle.base.css' %}">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static './assets/css/style.css' %}">
+
+</head>
+<body>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+                <div class="card col-lg-4 mx-auto">
+                    <div class="card-body px-5 py-5">
+                        <h3 class="card-title text-left mb-3">login</h3>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            {% load static %}
+                            <div class="form-group">
+                                <label for='email'><b>UserEmail : </b></label>
+                                <input type="email" placeholder="Enter email" name="email" float="right"
+                                       class="form-control p_input" required><br>
+                            </div>
+                            <div class="form-group">
+                                <label for='password'><b>Password : </b></label>
+                                <input type="password" placeholder="Enter Password" name="password"
+                                       class="form-control p_input" required><br>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                            </div>
+                            <center> Don't have account <a href="http://127.0.0.1:8000/signup/"> signup </a></center>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static './assets/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static './assets/js/off-canvas.js' %}"></script>
+<script src="{% static './assets/js/hoverable-collapse.js' %}"></script>
+<script src="{% static './assets/js/misc.js' %}"></script>
+<script src="{% static './assets/js/settings.js' %}"></script>
+<script src="{% static './assets/js/todolist.js' %}"></script>
+</body>
+</html>
