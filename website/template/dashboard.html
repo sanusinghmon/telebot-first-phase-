@@ -1,237 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <title>TELEBOT ADMIN</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TELEGRAM BOT DASHBOARD</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
 
     {% load static %}
-    <link href="{% static './assets/vendors/mdi/css/materialdesignicons.min.css'%}" rel="stylesheet">
-    <link href="{% static './assets/vendors/css/vendor.bundle.base.css' %}" rel="stylesheet">
-    <link href="{% static './assets/vendors/jvectormap/jquery-jvectormap.css' %}" rel="stylesheet">
-    <link href="{% static './assets/vendors/flag-icon-css/css/flag-icon.min.css' %}" rel="stylesheet">
-    <link href="{% static './assets/vendors/owl-carousel-2/owl.carousel.min.css' %}" rel="stylesheet">
-    <link href="{% static './assets/vendors/owl-carousel-2/owl.theme.default.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static './plugins/pg-calendar/css/pignose.calendar.min.css' %}">
+    <link rel="stylesheet" href="{% static './plugins/chartist/css/chartist.min.css' %}">
+    <link rel="stylesheet" href="{% static './plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' %}">
 
     {% load static %}
-    <link href="{% static './assets/css/style.css' %}" rel="stylesheet">
-    <!--     <link rel="stylesheet" href="{% static 'css/style.css'%}">-->
-    <!--    <link href="{% static './assets/images/favicon.png' %}" rel="shortcut icon"/>-->
-
-    <style>
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-.p1 {
-  color: orange;
-}
-
-    </style>
-</head>
-<body>
- <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
-    </div>
-    <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-            <h2 style="color:orange">
-                TELEGRAM BOT
-            </h2>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+ </head>
+ <body>
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
         </div>
-        <ul class="nav">
-            <li class="nav-item menu-items">
-                <a class="nav-link" href="">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
-                    <span class="menu-title">Dashboard</span>
+    </div>
+    <div id="main-wrapper">
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                     <b class="logo-abbr"><img src="" alt="">
+                     </b>
+                     <span class="logo-compact"><img src="" alt="">
+                     </span>
+                    <span class="brand-title">
+                        <img src="{% static 'images/logo-text.png' %}" alt="">
+                    </span>
                 </a>
-            </li>
-            <li class="nav-item menu-items">
-                <a aria-controls="ui-basic" aria-expanded="false" class="nav-link" data-bs-toggle="collapse"
-                   href="#ui-basic">
-                <span class="menu-icon">
-                   <i class="mdi mdi-laptop"></i>
-                </span>
-                    <span class="menu-title">TELEBOT </span>
-                    <i class="menu-arrow"></i>
-                </a>
-                <div class="collapse" id="ui-basic">
-                    <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/telebot/">TELEBOT 1</a>
+            </div>
+        </div>
+        <div class="header">    
+            <div class="header-content clearfix">
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+                    <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <div class="drop-down animated flipInX d-md-none">
+                            <form action="#">
+                                <input type="text" class="form-control" placeholder="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown"></a>
+                        <li class="icons dropdown d-none d-md-flex">
+                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
+                                <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                            </a>
+                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li><a href="javascript:void()">English</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="pages/ui-features/dropdowns.html">TELEBOT 2</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="pages/ui-features/typography.html">TELEBOT 3</a>
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                 <img src="{% static 'images/user/1.png' %}" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void()">
+                                                <i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill gradient-1">3</div>
+                                            </a>
+                                        </li>
+                                        <hr class="my-2">
+                                        <li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
-            <li class="nav-item menu-items">
-                <!--                <a class="nav-link" href=/editpage?message_id={{value.3}}">-->
-                <!--                   <span class="menu-icon">-->
-                <!--                       <i class="mdi mdi-playlist-play"></i>-->
-                <!--                   </span>-->
-                <!--                    <span class="menu-title">EDIT PAGE</span>-->
-                <!--                </a>-->
-            </li>
-        </ul>
-    </nav>
-    <div class="container-fluid page-body-wrapper">
-        <nav class="navbar p-0 fixed-top d-flex flex-row">
-            <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-                <button class="navbar-toggler navbar-toggler align-self-center" data-toggle="minimize" type="button">
-                    <span class="mdi mdi-menu"></span>
-                </button>
-                <ul class="navbar-nav w-100">
-                    <li class="nav-item w-100">
-                        <!--                        <header>-->
-                        <!--                            <div id="top-header">-->
-                        <!--                            </div>-->
-                        <!--                            <div>-->
-                        <!--                                <h2 style="color:orange">-->
-                        <!--                                    TELEGRAM BOT MESSAGE DASHBOARD-->
-                        <!--                                </h2>-->
-                        <!--                            </div>-->
-                        <!--                        </header>-->
+            </div>
+        </div>
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                        <ul aria-expanded="false">
+                           <li><a href="http://127.0.0.1:8000/telebot/">TELE BOT 1</a></li>
+                            <li><a href="http://127.0.0.1:8000">TELE BOT 2</a></li>
+                            <li><a href="http://127.0.0.1:8000">TELE BOT 3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./email-inbox.html">Inbox</a></li>
+                            <li><a href="./email-read.html">Read</a></li>
+                            <li><a href="./email-compose.html">Compose</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./page-login.html">Login</a></li>
+                            <li><a href="./page-register.html">Register</a></li>
+                            <li><a href="./page-lock.html">Lock Screen</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
-        </nav>
-        <div class="main-panel">
-            <div class="content-wrapper">
+        </div>
+        <div class="content-body">
+            <div class="container-fluid mt-4">
                 <div class="row">
-                    {% for key ,value in response_data.0.items %}
-                    <div class="col-sm-6 grid-margin">
-                        <div class="card">
+                    <div class="col-lg-12 col-sm-12">
+                        <div class="card gradient-3 ">
                             <div class="card-body">
-                                <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                                    <div class="d-flex d-sm-block d-md-flex align-items-center">
-                                        <p class="p1" class="text-success ms-2 mb-0 font-weight-medium"
-                                           style="font-size:25px;">BOT: {{value.1}}</p>
-                                    </div>
-                                    <!--                                    <h6 class="text-muted font-weight-normal">STATUS: ACTIVATE</h6>-->
-                                </div>
-                                <br><br>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 " >
-                                        <a class="nav-link" href="http://127.0.0.1:8000/telebot/">
-                                            <button class="btn btn-inverse-success btn-fw" type="button">STATUS PAGE
-                                            </button>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form action="/bot_update" method="GET">
-                                            <input hidden name="bot_id" style="width:30%" value="{{value.0}}"/>
-                                            <input hidden name="bot_name" style="width:30%" value="{{value.1}}"/>
-                                            {% if value.2 == '1' %}
-                                            <button class="btn btn-inverse-success btn-fw" name="bot_status"
-                                                    type="submit"
-                                                    value='0'>Deactivat Me!
-                                            </button>
-                                            {% else %}
-                                            <button class="btn btn-inverse-success btn-fw" name="bot_status"
-                                                    type="submit"
-                                                    value='1'>Activate Me!
-                                            </button>
-                                            {% endif %}
-                                        </form>
-                                    </div>
-                                </div>
-                                <!--                                <label class="switch">-->
-                                <!--                                    <input type="checkbox" checked>-->
-                                <!--                                    <span class="slider round"></span>-->
-                                <!--                                </label>-->
-                                <!--                                <label class="switch">-->
-                                <!--                                    {% if value.2 == '1' %}-->
-                                <!--                                    <input type="submit" name="bot_status" value="0">-->
-                                <!--                                    <span class="slider round"></span>-->
-                                <!--                                    {% else %}-->
-                                <!--                                    <input type="submit" name="bot_status" value="1">-->
-                                <!--                                    <span class="slider round"></span>-->
-                                <!--                                    {% endif %}-->
-                                <!--                                </label>-->
+                                <h3 class="card-title text-white"> 1) <U><BOLD> MESSAGE HEADER </BOLD></U></h3>
+                                {% for  key,value in response_data.1.items %}
+                                    <h3 class="card-title text-white">
+                                        {% if value.1 == '1' %}
+                                              {{value.0}}
+                                        {% else %}
+                                              {{value.0}}
+                                         {% endif %}
+                                      :{{value.2}}</h3>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-xl-between">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"><b>Copyright © Telegram Bot  2022</b></span>
-            </div>
-        </footer>
-    </div>
- </div>
-<script src="{% static './assets/vendors/js/vendor.bundle.base.js' %}"></script>
-<script src="{% static './assets/vendors/chart.js/Chart.min.js' %}"></script>
-<script src="{% static './assets/vendors/progressbar.js/progressbar.min.js' %}"></script>
-<script src="{% static './assets/vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
-<script src="{% static './assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
-<script src="{% static './assets/vendors/owl-carousel-2/owl.carousel.min.js' %}"></script>
-<script src="{% static './assets/js/jquery.cookie.js" type="text/javascript' %}"></script>
-<script src="{% static './assets/js/off-canvas.js' %}"></script>
-<script src="{% static './assets/js/hoverable-collapse.js' %}"></script>
-<script src="{% static './assets/js/misc.js' %}"></script>
-<script src="{% static './assets/js/settings.js' %}"></script>
-<script src="{% static './assets/js/todolist.js' %}"></script>
-<script src="{% static './assets/js/dashboard.js' %}"></script>
-</body>
+                       {% for key ,value in response_data.0.items %}
+                          {% if value.2 == '1' %}
+                            <div class="col-lg-6 col-sm-6">
+                               <div class="card gradient-6 padding">
+                                  <div class="card-body ">
+                                      <h1 class="card-title text-white"><U> BOT: {{value.1}} </U></h1>
+                                       <h3 class="card-title text-white"> STATUS: ACTIVATE </h3>
+                                       <div class="d-inline-block">
+                                          <h2 class="text-white"></h2>
+                                          <p class="text-white mb-0"></p>
+                                       </div>
+                                      <span class="float-right display-5 opacity-5"></span>
+                                  </div>
+                               </div>
+                            </div>
+                          {% else %}
+                            <div class="col-lg-6 col-sm-6">
+                               <div class="card  padding shadow">
+                                   <div class="card-body ">
+                                       <h1 class="card-title text-black"><U> BOT: {{value.1}} </U></h1>
+                                       <h3 class="card-title text-pink"> STATUS: DEACTIVATE </h3>
+                                       <div class="d-inline-block">
+                                          <h2 class="text-white"></h2>
+                                          <p class="text-white mb-0"></p>
+                                       </div>
+                                     <span class="float-right display-5 opacity-5"></span>
+                                   </div>
+                               </div>
+                            </div>
+                          {% endif %}
+                       {% endfor %}
+<!--               <a href="http://localhost:8000/dashboard/"> go to dashboard </a>-->
+
+    <script src="{% static 'plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <script src="{% static 'js/settings.js' %}"></script>
+    <script src="{% static 'js/gleek.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+    <script src="{% static './plugins/chart.js/Chart.bundle.min.js' %}"></script>
+    <script src="{% static './plugins/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static './plugins/d3v3/index.js' %}"></script>
+    <script src="{% static './plugins/topojson/topojson.min.js' %}"></script>
+    <script src="{% static './plugins/datamaps/datamaps.world.min.js' %}"></script>
+    <script src="{% static './plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static './plugins/morris/morris.min.js' %}"></script>
+    <script src="{% static './plugins/moment/moment.min.js' %}"></script>
+    <script src="{% static './plugins/pg-calendar/js/pignose.calendar.min.js' %}"></script>
+    <script src="{% static './plugins/chartist/js/chartist.min.js' %}"></script>
+    <script src="{% static './plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js' %}"></script>
+  </body>
 </html>

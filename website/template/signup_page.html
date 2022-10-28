@@ -1,73 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>telebot dashboard</title>
+<html>
+    <head>
+        <title>Signup Page</title>
+        <style>
+            body{
+                font-family: Arial,
+                float: center;Helvetica, sans-serif;
+                background-color: gray;
+                padding: 10px;
+            }
+            button{
+                background-color: #4CAF50;
+                width: 25%;
+                padding: 15px;
+                color: black;
+                border: none;
+                font-size: 15px;
+            }
+            label{
+                font-size: 20px;
+            }
+            form{
+                border: 3px solid #f1f1f1;
+            }
+            input[type=email],input[type=text]{
+                width: 50%;
+                font-size: 15px;
+                margin: 8px 0px;
+                padding: 12px 20px;
+                display: inline-block;
+                border: 2px solid green;
+                box-sizing: border-box;
+            }
+            input[type=radio]{
+                height: 18px;
+                width: 18px;
+            }
+            button:hover{
+                opacity:0.7;
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static './assets/vendors/mdi/css/materialdesignicons.min.css' %}">
-    <link rel="stylesheet" href="{% static './assets/vendors/css/vendor.bundle.base.css' %}">
+            }
+            .container{
+                padding: 10px;
+                background-color: lightblue;
+            }
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 22px 0;
+            }
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static './assets/css/style.css' %}">
-
-    <style>
-       .container{
-            padding: 10px;
-           }
-    </style>
-</head>
-<body>
-<div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="row w-100 m-0">
-            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
-                <div class="card col-lg-4 mx-auto">
-                    <div class="card-body px-5 py-5">
-                        <h3 class="card-title text-left mb-3">signup</h3>
-                        <form action="#" method="post">
-                            {% csrf_token %}
-                            {% load static %}
-                            <div class="form-group">
-                                <label for="first_name"><b>First Name : </b></label>
-                                <input type='text' placeholder="Enter your first name" name='first_name'
-                                       class="form-control p_input" required><br>
-                            </div>
-                            <div class="form-group">
-                                <label for='last_name'><b>Last Name :</b></label>
-                                <input type='text' placeholder='Enter your last name' name='last_name'
-                                       class="form-control p_input" required><br>
-                            </div>
-                            <div class="form-group">
-                                <label for='email'><b>Email Id : </b></label>
-                                <input type="email" placeholder="Enter email" name="email" float="right"
-                                       class="form-control p_input" required><br>
-                            </div>
-                            <div class="form-group">
-                                <label for='password'><b>Password : </b></label>
-                                <input type="text" placeholder="Enter Password" name="password"
-                                       class="form-control p_input" required><br>
-                            </div>
-                            <div class="form-group d-flex align-items-center justify-content-between">
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block enter-btn">signup</button>
-                                </div>
-                                <p class="sign-up text-center">Already have an Account?<a
-                                        href="http://127.0.0.1:8000/login/">login</a></p>
-                            </div>
-                        </form>
-                    </div>
+            img.avatar {
+                width: 10%;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <center><h1>Register From</h1></center>
+        <form action="#" method="post">
+            {% csrf_token %}
+            {% load static %}
+            <center><div class="container">
+                <div class="imgcontainer">
+                    <img src="{% static 'avatar_img2.png' %}" alt="Avatar" class="avatar">
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="{% static './assets/vendors/js/vendor.bundle.base.js' %}"></script>
-<script src="{% static './assets/js/off-canvas.js' %}"></script>
-<script src="{% static './assets/js/hoverable-collapse.js' %}"></script>
-<script src="{% static './assets/js/misc.js' %}"></script>
-<script src="{% static './assets/js/settings.js' %}"></script>
-<script src="{% static './assets/js/todolist.js' %}"></script>
-</body>
+                <label for='first_name'><b>First Name : </b></label>
+		        <input type='text' placeholder="Enter your first name" name='first_name' required><br>
+		        <label for='last_name'><b>Last Name :</b></label>
+		        <input type='text' placeholder='Enter your last name' name='last_name' required><br>
+		        <label for='Gender'><b>Gender: </b></label>
+		        <input type='radio' name='Gender' value='male' required>
+		        <label ><b>Male</b></label>
+		        <input type='radio' name='Gender' value='female' required>
+		        <label ><b>Female</b></label><br>
+            	<label for ='email'><b>Email Id :  </b></label>
+            	<input type="email" placeholder="Enter email" name="email" float="right"  required><br>
+            	<label for='password'><b>Password : </b></label>
+            	<input type="text" placeholder="Enter Password" name="password" required><br>
+            	<button type="submit"><b>Signup</b></button><br>
+            	Already an account <a href="http://127.0.0.1:8000/login/"> Login </a>
+            </div></center>
+        </form>
+    </body>
 </html>

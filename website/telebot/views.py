@@ -4,17 +4,14 @@ from django.http import HttpResponse
 from django.template import loader
 import mysql.connector
 from requests import Response
-import mysql.connector as sql
 
+bot_details= {}
+messages = {}
+response_data = {}
 
+# function for control the dtahboard or update form in telegram bot
 
-#It can control control the dashboard or update the telegram bot (it can read from the database)
 def telebot(request):
-
-    bot_details = {}
-    messages = {}
-    response_data = {}
-
     # template = loader.get_template('telebot.html')
     mydb = mysql.connector.connect(
         host="localhost",
@@ -32,7 +29,7 @@ def telebot(request):
     mycursor.execute(query)
     messageDetails = mycursor.fetchall()
     for x in messageDetails:
-        messages[x[0]] = (x[1],x[2],x[3],x[0],x[4])
+        messages[x[0]] = (x[1], x[2], x[3],x[0])
     response_data[0] = bot_details
     response_data[1] = messages
     # return HttpResponse(template.render({'response_data': response_data}, request))
@@ -40,36 +37,34 @@ def telebot(request):
 
 
 
-
-#new function to update the (active or pending statements)
+#new function
 def update (request):
-        mydb = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="website"
-        )
-        mycursor = mydb.cursor()
-        message_id=request.GET.getlist('message_id')
-        # message = request.GET.getlist('messages')
-        message_status = request.GET.getlist('message_status')
-        current_message_status = '0'
-        message_timing = request.GET.getlist('message_timing')
-        for i in range(len(message_id)):
-           if(message_id[i] in message_status):
-               current_message_status = '1'
-           else:
-               current_message_status = '0'
-           query = "UPDATE `botmessage` SET `message_status`='"+current_message_status+"',`timing`='"+message_timing[i]+"' WHERE `id` = '"+message_id[i]+"'"
-           mycursor.execute(query)
-           mydb.commit()
-        return redirect("http://127.0.0.1:8000/telebot/")
-        # return HttpResponse(request)
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="",
+        database="website"
+    )
+    mycursor = mydb.cursor()
+    message_id=request.GET.getlist('message_id')
+    message = request.GET.getlist('messages')
+    message_status = request.GET.getlist('message_status')
+    current_message_status = '0'
+    message_timing = request.GET.getlist('message_timing')
+    for i in range(len(message_id)):
+       if(message_id[i] in message_status):
+           current_message_status = '1'
+       else:
+           current_message_status = '0'
+       query = "UPDATE `botmessage` SET `messages`='"+message[i]+"',`message_status`='"+current_message_status+"',`timing`='"+message_timing[i]+"' WHERE `id` = '"+message_id[i]+"'"
+       mycursor.execute(query)
+       mydb.commit()
+    return redirect("http://127.0.0.1:8000/telebot/")
+    # return HttpResponse(request)
 
 
 
-
-#it can chnage the bot ststus (activate or deactivate) updater.
+#bot status updater
 def bot_update (request):
     mydb = mysql.connector.connect(
         host="localhost",
@@ -81,63 +76,41 @@ def bot_update (request):
     bot_name=request.GET.getlist('bot_name')
     bot_id = request.GET.getlist('bot_id')
     bot_status=request.GET.getlist('bot_status')
-    # print(request.GET)
+    print(request.GET)
     for i in range(len(bot_id)):
-       query = "UPDATE  `bot_status` SET `bot`='"+bot_name[i]+"',`status`='"+bot_status[i]+"' WHERE `id` = '"+bot_id[i]+"'"
+       query = "UPDATE `bot_status` SET `bot`='"+bot_name[i]+"',`status`='"+bot_status[i]+"' WHERE `id` = '"+bot_id[i]+"'"
        mycursor.execute(query)
        mydb.commit()
-    return redirect("http://127.0.0.1:8000/dashboard/")
-
-
-
-
-
-#It is used to insert the message on dashboard(we only insert message or timing on it from the from tabel )
-
-msgh = ''
-msg = ''
-tim = ''
-
-def form(request):
-    global msg,tim,msgh
-    if request.method == "POST":
-        m = sql.connect(host="localhost", user="root", passwd="", database='website')
-        cursor = m.cursor()
-        d = request.POST
-        for key, value in d.items():
-            if key == "message header":
-                msgh = value
-            if key == "messages":
-                msg = value
-            if key == "timing":
-                tim = value
-        c = "insert into `botmessage` (`message header`,`messages`,`timing`) Values('{}','{}','{}')".format(msgh,msg,tim)
-        # print (c)
-        cursor.execute(c)
-        m.commit()
     return redirect("http://127.0.0.1:8000/telebot/")
 
 
 
 
 
-#It is used to delete the row from the databse using (id) delete button is in dashboard page
-def deleterow (request):
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="website"
-    )
-    mycursor = mydb.cursor()
-    message_id = request.GET.getlist('message_id')
-    # print(message_id)
-    query = "DELETE FROM `botmessage` WHERE `id` ='"+message_id[0]+"'"
-    # print(query)
-    mycursor.execute(query)
-    mydb.commit()
-    # return render(request,'telebot.html')
-    return redirect("http://127.0.0.1:8000/telebot/")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -189,6 +162,36 @@ def deleterow (request):
 #     bot_data[2] = message_status
 #     bot_data[3] = message_timing
 #     return HttpResponse(template.render({"bot_data":bot_data},request))
+
+
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

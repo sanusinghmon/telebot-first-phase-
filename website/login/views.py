@@ -1,12 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 import mysql.connector as sql
-
-
-
 em = ''
 pwd = ''
-
+# Create your views here.
 def loginaction (request):
     global em,pwd
     if request.method == "POST":
@@ -18,6 +15,7 @@ def loginaction (request):
                 em = value
             if key == "password":
                 pwd = value
+
         c = "select * from users where email='{}' and password='{}'".format(em, pwd)
         cursor.execute(c)
         t = tuple(cursor.fetchall())

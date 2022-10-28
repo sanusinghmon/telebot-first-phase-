@@ -42,9 +42,6 @@ INSTALLED_APPS = [
     'login',
     'dashboard',
     'telebot',
-    'edit',
-
-
 
 ]
 
