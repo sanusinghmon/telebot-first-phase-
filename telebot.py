@@ -23,7 +23,7 @@ while(True):
     for x in myresult:
      if(x!=""):
         print('send')
-        base_url = 'https://api.telegram.org/bot5413394611:AAFE_SLHcKs4orJrL3KrKBqOzlIdwEDI0nM/sendMessage?chat_id=-1001628930827&text={} '.format(x[1])
+        base_url = 'https://api.telegram.org/()/sendMessage?chat_id=()&text={} '.format(x[1])
         requests.get(base_url)
         #print(base_url)
      time.sleep(60)
